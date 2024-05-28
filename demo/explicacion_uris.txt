@@ -1,0 +1,8 @@
+https://   aula.energizavirtual.cl /mod/page/view.php ? id=42721&role=student
+
+Protocolo        HOST                  PATH               PARÁMETROS
+
+
+
+URL = Universal Resource Location
+URI = Universal Resource Identifier

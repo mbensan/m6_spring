@@ -1,5 +1,7 @@
 package sust.demo.models;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Task {
-  int id;
-  String text;
+public class Tarea {
+  private int id;
+  private String texto;
+  private boolean completada;
+  private Date fecha;
 }

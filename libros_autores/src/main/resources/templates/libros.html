@@ -29,10 +29,10 @@
                   <td>[[${libro.titulo}]]</td>
                   <td>[[${libro.descripcion}]]</td>
                   <td>
-                    <a th:href="@{|/libros/detalle?id=${libro.id}|}">
+                    <a th:href="@{|/libros/detalle/${libro.id}|}">
                       <i class="bi bi-pencil"></i>
                     </a>
-                    <a th:href="@{|/libros/borrar?id=${libro.id}|}">
+                    <a th:href="@{|/libros/borrar/${libro.id}|}">
                       <i class="bi bi-trash"></i>
                     </a>
                   </td>

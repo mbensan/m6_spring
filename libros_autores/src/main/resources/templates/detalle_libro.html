@@ -9,24 +9,24 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 <body>
+  <div th:replace="~{fragments/fragments :: navbar}"></div>
   <div class="container">
     <h4>[[${libro.titulo}]]</h4>
     <p>ID: [[${libro.id}]]</p>
     <p><b>Descripción:</b> [[${libro.descripcion}]]</p>
     <h3>Autores</h3>
     <ul>
-      <li>Jacob Grimm</li>
-      <li>Wilhelm Grim</li>
+      <li th:each="autor: ${autoresSiRelacionados}">[[${autor.nombre}]] [[${autor.apellido}]]</li>
     </ul>
     
     <div class="row">
       <div class="col-4">
-        <form>
-          <select class="form-select" aria-label="Default select example">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+        <form method="post" th:action="@{|/libros/${libro.id}/agregarautor|}">
+          <select required class="form-select" name="autor_id">
+            <option value selected>Open this select menu</option>
+            <option th:each="autor: ${autoresNoRelacionados}" th:value="${autor.id}">
+              [[${autor.nombre}]] [[${autor.apellido}]]
+            </option>
           </select>
           <button type="submit" class="btn btn-primary">Agregar</button>
         </form>

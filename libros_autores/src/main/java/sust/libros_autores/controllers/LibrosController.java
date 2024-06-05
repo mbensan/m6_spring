@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import sust.libros_autores.models.Autor;
 import sust.libros_autores.models.Libro;
 import sust.libros_autores.services.LibroDao;
 
@@ -56,10 +57,22 @@ public class LibrosController {
 
     try {
       Libro libro = dao.getById(id);
+      ArrayList<Autor> autoresNoRelacionados = dao.getAutoresNoRelacionados(id);
+      ArrayList<Autor> autoresSiRelacionados = dao.getAutoresSiRelacionados(id);
       vista.addObject("libro", libro);
+      vista.addObject("autoresNoRelacionados", autoresNoRelacionados);
+      vista.addObject("autoresSiRelacionados", autoresSiRelacionados);
     } catch (SQLException e) {
       e.printStackTrace();
     }
     return vista;
+  }
+
+  @PostMapping("/libros/{libro_id}/agregarautor")
+  public String agregarAutor(@PathVariable int libro_id, @RequestParam int autor_id) {
+    // 1. Agregamos el autor al libro
+    dao.addAutor(libro_id, autor_id);
+    // 2. Redirigimos a /libros
+    return "redirect:/libros/detalle/" + libro_id;
   }
 }

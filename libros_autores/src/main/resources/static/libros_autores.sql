@@ -26,3 +26,15 @@ insert into libros (titulo, descripcion) values
 ('El Silmarillion', 'El inicio del señor de los anillos');
 
 select * from libros;
+
+-- libro_id=5
+-- Autores SI relacionados
+select * from autores
+join libroautor on autores.id = libroautor.libro_id
+where id = 5
+ -- Autores no relacionados
+ select * from autores
+ where id not in 
+ (select id from autores
+join libroautor on autores.id = libroautor.libro_id
+where id = 5)

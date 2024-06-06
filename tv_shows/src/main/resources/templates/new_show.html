@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+  <h1 class="text-center">Agregue un Programa de TV</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-6 offset-3">
+        <form action="/shows/create" method="post">
+          <div class="mb-3">
+            <label class="form-label">Título</label>
+            <input type="text" required class="form-control" name="title">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Fecha Lanzamiento</label>
+            <input type="date" required class="form-control" name="release_date">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <input type="text" required class="form-control" name="description">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Cadena</label>
+            <select class="form-select" name="network" required>
+              <option selected value>Elija una cadena</option>
+              <option value="Paramount">Paramount</option>
+              <option value="HBO">HBO</option>
+              <option value="Star+">Star+</option>
+            </select>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

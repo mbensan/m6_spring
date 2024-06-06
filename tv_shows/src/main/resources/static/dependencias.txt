@@ -1,0 +1,7 @@
+Spring Boot DevTools
+Lombok
+Spring Web
+Thymeleaf
+JDBC API SQL
+PostgreSQL Driver
+Spring Data JPA

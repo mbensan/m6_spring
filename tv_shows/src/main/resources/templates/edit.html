@@ -10,27 +10,26 @@
 </head>
 <body>
   <div th:replace="~{fragments/fragments :: navbar}"></div>
-  <h1 class="text-center">Agregue un Programa de TV</h1>
+  <h1 class="text-center">Edite el Programa de TV</h1>
   <div class="container">
     <div class="row">
       <div class="col-6 offset-3">
-        <form action="/shows/create" method="post">
+        <form th:action="@{|/shows/${show.id}/edit|}" method="post">
           <div class="mb-3">
             <label class="form-label">Título</label>
-            <input type="text" required class="form-control" name="title">
+            <input type="text" required class="form-control" name="title" th:value="${show.title}">
           </div>
           <div class="mb-3">
             <label class="form-label">Fecha Lanzamiento</label>
-            <input type="date" required class="form-control" name="release_date">
+            <input type="date" required class="form-control" name="release_date" th:value="${show.release_date}">
           </div>
           <div class="mb-3">
             <label class="form-label">Descripción</label>
-            <input type="text" required class="form-control" name="description">
+            <input type="text" required class="form-control" name="description" th:value="${show.description}">
           </div>
           <div class="mb-3">
             <label class="form-label">Cadena</label>
-            <select class="form-select" name="network" required>
-              <option selected value>Elija una cadena</option>
+            <select class="form-select" name="network" required th:value="${show.network}">
               <option value="Paramount">Paramount</option>
               <option value="HBO">HBO</option>
               <option value="Star+">Star+</option>

@@ -1,5 +1,6 @@
 package sust.tv_shows.controllers;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import sust.tv_shows.models.Network;
+import sust.tv_shows.models.NetworkRepository;
 import sust.tv_shows.models.Show;
 import sust.tv_shows.models.ShowRepository;
 
@@ -21,30 +24,42 @@ public class ShowsController {
   @Autowired
   ShowRepository repo;
 
+  @Autowired
+  NetworkRepository netRepo;
+
   @GetMapping("/shows")
   public ModelAndView showsScreen() {
     ModelAndView vista = new ModelAndView("shows.html");
     List<Show> shows = repo.findAll();
-    vista.addObject("shows", shows);
+    // vista.addObject("shows", shows);
     return vista;
   }
 
   @GetMapping("/shows/new")
   public ModelAndView createShowsScreen() {
     ModelAndView vista = new ModelAndView("new_show.html");
+    List<Network> networks = netRepo.findAll();
+    vista.addObject("networks", networks);
     return vista;
   }
 
   @PostMapping(value = "/shows/create")
-  public String createShow(@RequestParam String title, @RequestParam String release_date,
-      @RequestParam String network, @RequestParam String description, RedirectAttributes redAt) {
+  public String createShow(@RequestParam String title, @RequestParam String release_date, @RequestParam Long network_id,
+      @RequestParam String description, RedirectAttributes redAt) {
+    System.out.println(network_id + "\n\n\n");
+
+    // 1. Recuperamos la network
+    Network n = netRepo.findById(network_id).get();
+    // 2. Creamos el nuevo show
     Show s = new Show();
     s.setTitle(title);
     s.setRelease_date(release_date);
-    s.setNetwork(network);
+    s.setNetwork(n);
     s.setDescription(description);
     repo.save(s);
+
     redAt.addFlashAttribute("bien", "El show ha sido creado correctamente");
+
     return "redirect:/shows";
   }
 
@@ -76,12 +91,12 @@ public class ShowsController {
     s.setTitle(title);
     s.setDescription(description);
     s.setRelease_date(release_date);
-    s.setNetwork(network);
+    // s.setNetwork(network);
     // 3. Lo guardo
     repo.save(s);
-    // 4. Agregamos mensaje de FEEDBACK
-    redAt.addFlashAttribute("bien", "Show actualizado correctamente");
-    // 5. Redirijo a /shows
     return "redirect:/shows";
+    // 4. Agregamos mensaje de FEEDBACK
+    // redAt.addFlashAttribute("bien", "Show actualizado correctamente");
+    // 5. Redirijo a /shows
   }
 }

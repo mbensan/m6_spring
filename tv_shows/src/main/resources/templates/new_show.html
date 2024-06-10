@@ -29,11 +29,13 @@
           </div>
           <div class="mb-3">
             <label class="form-label">Cadena</label>
-            <select class="form-select" name="network" required>
+            <select class="form-select" name="network_id" required>
               <option selected value>Elija una cadena</option>
-              <option value="Paramount">Paramount</option>
-              <option value="HBO">HBO</option>
-              <option value="Star+">Star+</option>
+              <option
+                th:each="n : ${networks}"
+                th:value="${n.id}">
+                [[${n.name}]]
+              </option>
             </select>
           </div>
           

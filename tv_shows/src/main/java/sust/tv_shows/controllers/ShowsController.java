@@ -31,7 +31,12 @@ public class ShowsController {
   public ModelAndView showsScreen() {
     ModelAndView vista = new ModelAndView("shows.html");
     List<Show> shows = repo.findAll();
-    // vista.addObject("shows", shows);
+
+    for (Show show : shows) {
+      show.setNetworkName(show.getNetwork().getName());
+      show.setNetwork(null);
+    }
+    vista.addObject("shows", shows);
     return vista;
   }
 

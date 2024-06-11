@@ -35,6 +35,8 @@ public class Show {
   @Column
   String description;
 
+  String networkName;
+
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "network_id", referencedColumnName = "id")
   Network network;

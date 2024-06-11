@@ -17,9 +17,13 @@ import sust.tv_shows.models.Network;
 import sust.tv_shows.models.NetworkRepository;
 import sust.tv_shows.models.Show;
 import sust.tv_shows.models.ShowRepository;
+import sust.tv_shows.services.ShowsDao;
 
 @Controller
 public class ShowsController {
+
+  @Autowired
+  ShowsDao showDao;
 
   @Autowired
   ShowRepository repo;
@@ -30,12 +34,7 @@ public class ShowsController {
   @GetMapping("/shows")
   public ModelAndView showsScreen() {
     ModelAndView vista = new ModelAndView("shows.html");
-    List<Show> shows = repo.findAll();
-
-    for (Show show : shows) {
-      show.setNetworkName(show.getNetwork().getName());
-      show.setNetwork(null);
-    }
+    List<Show> shows = showDao.findAll();
     vista.addObject("shows", shows);
     return vista;
   }
@@ -51,20 +50,9 @@ public class ShowsController {
   @PostMapping(value = "/shows/create")
   public String createShow(@RequestParam String title, @RequestParam String release_date, @RequestParam Long network_id,
       @RequestParam String description, RedirectAttributes redAt) {
-    System.out.println(network_id + "\n\n\n");
-
-    // 1. Recuperamos la network
-    Network n = netRepo.findById(network_id).get();
-    // 2. Creamos el nuevo show
-    Show s = new Show();
-    s.setTitle(title);
-    s.setRelease_date(release_date);
-    s.setNetwork(n);
-    s.setDescription(description);
-    repo.save(s);
-
+    // System.out.println(network_id + "\n\n\n");
+    showDao.create(title, description, release_date, network_id);
     redAt.addFlashAttribute("bien", "El show ha sido creado correctamente");
-
     return "redirect:/shows";
   }
 

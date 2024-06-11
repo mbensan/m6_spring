@@ -5,3 +5,4 @@ Thymeleaf
 JDBC API SQL
 PostgreSQL Driver
 Spring Data JPA
+Validation I/O

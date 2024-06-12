@@ -1,0 +1,6 @@
+/ => El Muro
+/login => Formulario de Login
+  (username, password)
+/register => Formulario de Registro
+  (username, name, password, passConfirm)
+  

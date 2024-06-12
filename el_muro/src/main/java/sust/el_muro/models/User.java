@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,23 +17,26 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
-@Table(name = "messages")
-public class Message {
-
+@Table(name = "users")
+public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   Long id;
 
+  @Column(nullable = false, unique = true)
+  String username;
+
   @Column(nullable = false)
-  String message;
+  String name;
+
+  @Column(nullable = false)
+  String password;
 
   @Column
   @DateTimeFormat(pattern = "yyyy-MM-dd")

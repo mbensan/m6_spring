@@ -25,12 +25,22 @@
             </li>
           </ul>
           <div class="d-flex" role="search">
-            <div class="text-light me-3">Hola Usuario</div>
-            <button class="btn btn-outline-warning" >Logout</button>
+            <div th:text="${session.user.name}" class="text-light me-3"></div>
+            <a href="/logout" class="btn btn-outline-warning">Logout</a>
           </div>
         </div>
       </div>
     </nav>
+    <div class="alertas">
+      <div th:if="${bien}" class="alert alert-success alert-dismissible fade show" role="alert" id="myAlert">
+        <strong>[[${bien}]]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div th:if="${mal}" class="alert alert-danger alert-dismissible fade show" role="alert" id="myAlert">
+        <strong>[[${mal}]]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
     <div class="row">
       <div class="col-3">
         <h4>Sidebar</h4>

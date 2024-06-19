@@ -54,17 +54,20 @@
                   <input type="hidden" name="message_id" th:value="${m.id}">
                   <input type="hidden" name="user_id" th:value="${session.user.id}">
                   <label for="exampleInputEmail1" class="form-label">Comentar</label>
-                  <textarea  class="form-control" placeholder="Leave a comment here"></textarea>
+                  <textarea name="content" class="form-control" placeholder="Leave a comment here"></textarea>
                 </div>
                 <button type="submit" class="btn btn-outline-primary">Crear</button>
               </form>
-              <div class="comentarios px-2 m-2 border border-success">
-                <h4>Pedro Picapiedras</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quisquam fugit minima excepturi nisi assumenda odio praesentium, nam tempore cumque quae quasi vel voluptates. Officia dignissimos aspernatur nesciunt reiciendis recusandae.</p>
-              </div>
-              <div class="comentarios px-2 m-2 border border-success">
-                <h4>Juanito Perez</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quisquam fugit minima excepturi nisi assumenda odio praesentium, nam tempore cumque quae quasi vel voluptates. Officia dignissimos aspernatur nesciunt reiciendis recusandae.</p>
+              <a href="#">Ver comentarios</a>
+              <div class="lista-comentarios d-none">
+                <div class="comentarios px-2 m-2 border border-success">
+                  <h4>Pedro Picapiedras</h4>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quisquam fugit minima excepturi nisi assumenda odio praesentium, nam tempore cumque quae quasi vel voluptates. Officia dignissimos aspernatur nesciunt reiciendis recusandae.</p>
+                </div>
+                <div class="comentarios px-2 m-2 border border-success">
+                  <h4>Juanito Perez</h4>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quisquam fugit minima excepturi nisi assumenda odio praesentium, nam tempore cumque quae quasi vel voluptates. Officia dignissimos aspernatur nesciunt reiciendis recusandae.</p>
+                </div>
               </div>
             </div>
           </div>

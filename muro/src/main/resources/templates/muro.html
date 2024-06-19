@@ -49,10 +49,12 @@
             <div class="card-body">
               <h5 class="card-title">[[${m.creatorsName}]]</h5>
               <p class="card-text">[[${m.message}]]</p>
-              <form class="p-1">
+              <form class="p-1" method="post" action="/comments">
                 <div class="mb-3">
+                  <input type="hidden" name="message_id" th:value="${m.id}">
+                  <input type="hidden" name="user_id" th:value="${session.user.id}">
                   <label for="exampleInputEmail1" class="form-label">Comentar</label>
-                  <textarea class="form-control" placeholder="Leave a comment here"></textarea>
+                  <textarea  class="form-control" placeholder="Leave a comment here"></textarea>
                 </div>
                 <button type="submit" class="btn btn-outline-primary">Crear</button>
               </form>

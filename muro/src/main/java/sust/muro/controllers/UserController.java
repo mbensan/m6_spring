@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import sust.muro.daos.UsersDao;
 import sust.muro.models.*;
 
 @Controller
@@ -18,6 +19,9 @@ public class UserController {
 
   @Autowired
   UserRepository userRepo;
+
+  @Autowired
+  UsersDao usersDao;
 
   @GetMapping("/login")
   public String loginForm() {
@@ -37,23 +41,14 @@ public class UserController {
       redAt.addFlashAttribute("mal", "Las contraseñas no coinciden");
       return "redirect:/register";
     }
-    // 2. Creamos un nuevo usuario
-    User u = new User();
-    u.setName(name);
-    u.setPassword(password);
-    u.setUsername(username);
-
-    // 3. Lo guardamos en base de datos
-    try {
-      userRepo.save(u);
-    } catch (Exception e) {
-      redAt.addFlashAttribute("mal", "Ese nombre de usuario ya existe");
-      return "redirect:/register";
+    // 2. Creamos un nuevo usuario, si todo sale OK, redirigimos a pantalla
+    // principal
+    // en caso contrario, redirigimos al formulario
+    boolean resultado = usersDao.create(name, username, password, redAt, session);
+    if (resultado) {
+      return "redirect:/";
     }
-    // 4. Creamos la sesión
-    session.setAttribute("user", u);
-    // 5. Redirigimos a la página principal
-    return "redirect:/";
+    return "redirect:/register";
   }
 
   @PostMapping("/login")
@@ -69,6 +64,7 @@ public class UserController {
       return "redirect:/login";
     }
     session.setAttribute("user", u);
+    session.setAttribute("user_session_id", u.getId());
     return "redirect:/";
   }
 

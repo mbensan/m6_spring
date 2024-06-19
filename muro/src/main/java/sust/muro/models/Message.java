@@ -59,4 +59,7 @@ public class Message {
   @ManyToOne
   @JoinColumn(name = "user_id", referencedColumnName = "id")
   User user;
+
+  // atributos no columnas
+  String creatorsName;
 }

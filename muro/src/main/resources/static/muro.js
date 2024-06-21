@@ -22,15 +22,10 @@ function render_comments(message_id, data) {
         <p>${comment.content}</p>
       </div>
     `;
-    lista_comentarios.innerHTML += `
-      <div class="comentarios px-2 m-2 border border-success">
-        <h4>%s</h4>
-        <p>%s</p>
-      </div>
-    `.formatted(comment.creatorName, comment.content);
   }
   // hacemos la lista de comentarios visible
-  lista_comentarios.classList.remove('d-none');
+  console.log($('#' + message_id).html());
+  $('#' + message_id).slideDown(1500);
 }
 
 function batman () {

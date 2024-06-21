@@ -58,16 +58,8 @@
                 </div>
                 <button type="submit" class="btn btn-outline-primary">Crear</button>
               </form>
-              <a href="#">Ver comentarios</a>
-              <div class="lista-comentarios d-none">
-                <div class="comentarios px-2 m-2 border border-success">
-                  <h4>Pedro Picapiedras</h4>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quisquam fugit minima excepturi nisi assumenda odio praesentium, nam tempore cumque quae quasi vel voluptates. Officia dignissimos aspernatur nesciunt reiciendis recusandae.</p>
-                </div>
-                <div class="comentarios px-2 m-2 border border-success">
-                  <h4>Juanito Perez</h4>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quisquam fugit minima excepturi nisi assumenda odio praesentium, nam tempore cumque quae quasi vel voluptates. Officia dignissimos aspernatur nesciunt reiciendis recusandae.</p>
-                </div>
+              <a onclick="load_comments(event)" href="#" th:data-id="${m.id}">Ver comentarios</a>
+              <div th:id="${m.id}" class="lista-comentarios d-none">
               </div>
             </div>
           </div>
@@ -76,5 +68,6 @@
     </div>
     <h1>Hello-Bootstrap</h1>
   </div>
+  <script src="muro.js"></script>
 </body>
 </html>

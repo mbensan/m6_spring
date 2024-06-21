@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
-@RequestMapping("/api/comments")
+@RequestMapping("/api")
 public class CommentRestController {
 
   @Autowired
   CommentsDao commentDao;
 
-  @GetMapping("/{message_id}")
+  @GetMapping("/messages/{message_id}/comments")
   public List<Comment> getAll(@PathVariable Long message_id) {
     List<Comment> comments = commentDao.getCommentsFromMessage(message_id);
 

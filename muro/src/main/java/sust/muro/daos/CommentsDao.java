@@ -42,15 +42,15 @@ public class CommentsDao {
   public List<Comment> getCommentsFromMessage(Long message_id) {
     Message m = messageRepo.findById(message_id).get();
     List<Comment> comments = commentRepo.findByMessage(m);
-    List<Comment> retorno = new ArrayList<Comment>();
+    List<Comment> clean_comments = new ArrayList<Comment>();
     for (Comment com : comments) {
       Comment c = new Comment();
       c.setId(com.getId());
       c.setContent(com.getContent());
       c.setCreated(com.getCreated());
       c.setCreatorsName(com.getUser().getName());
-      retorno.add(c);
+      clean_comments.add(c);
     }
-    return retorno;
+    return clean_comments;
   }
 }

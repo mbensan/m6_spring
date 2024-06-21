@@ -62,9 +62,9 @@
                   <h5 class="card-title">[[${m.creatorsName}]]</h5>
                 </div>
                 <div class="col-2 likes-cont">
-                  <span class="likes">4</span>
-                  <a href="#">
-                    <i class="bi bi-hand-thumbs-up"></i>
+                  <span class="likes" th:id="|likes-${m.id}|">[[${m.likes}]]</span>
+                  <a href="#" onclick="add_like(event)">
+                    <i class="bi bi-hand-thumbs-up" th:data-id="${m.id}"></i>
                   </a>
                 </div>
               </div>

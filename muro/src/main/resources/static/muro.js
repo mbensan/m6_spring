@@ -36,3 +36,24 @@ function batman () {
   console.log(str);
   console.log('LIIIIDEEEER');
 }
+
+async function add_like (event) {
+  // 0. Evitamos que el enlace clickeado recargue la página
+  event.preventDefault();
+  // 1. Recuperamos el ID del mensaje clickeado
+  const message_id = event.target.dataset.id;
+  // 2. Realizamos la solicitud al servidor
+  const response = await fetch('/messages/'+message_id+'/likes', {
+    method: 'POST'
+  });
+  // 3. Actualizamos el número de likes
+  update_likes (message_id); 
+}
+function update_likes(message_id) {
+  // 1. Recuperamos el SPAN
+  const span_likes = $('#likes-' + message_id);
+  // 2. Calculamos el nuevo valor, sumandole 1 al valor antiguo
+  const nuevo_valor = parseInt(span_likes.html()) + 1;
+  // 3. Dejamos el nuevo valor en el SPAN
+  span_likes.html(nuevo_valor)
+}

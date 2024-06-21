@@ -46,6 +46,9 @@ public class Message {
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   Date updated;
 
+  @Column(columnDefinition = "int not null default 0")
+  int likes;
+
   // vamos a configurar para que al crear un usuario, se guarde la marca temporal
   // de forma automática
   @PrePersist

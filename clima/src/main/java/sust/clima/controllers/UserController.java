@@ -1,6 +1,7 @@
 package sust.clima.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,13 +10,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import sust.clima.daos.UsersDao;
 import sust.clima.models.*;
 
 @Controller
 public class UserController {
+
+  BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
   @Autowired
   UserRepository userRepo;
@@ -44,7 +46,8 @@ public class UserController {
     // 2. Creamos un nuevo usuario, si todo sale OK, redirigimos a pantalla
     // principal
     // en caso contrario, redirigimos al formulario
-    boolean resultado = usersDao.create(name, username, password, redAt, session);
+    String password_encriptada = encoder.encode(password);
+    boolean resultado = usersDao.create(name, username, password_encriptada, redAt, session);
     if (resultado) {
       return "redirect:/";
     }
@@ -59,7 +62,9 @@ public class UserController {
       redAt.addFlashAttribute("mal", "Usuario inexistente o contraseña incorrecta");
       return "redirect:/login";
     }
-    if (!u.getPassword().equals(password)) {
+    // me traigo la password encriptada que viene de la base de datos
+    String password_encriptada = u.getPassword();
+    if (!encoder.matches(password, password_encriptada)) {
       redAt.addFlashAttribute("mal", "Usuario inexistente o contraseña incorrecta");
       return "redirect:/login";
     }
